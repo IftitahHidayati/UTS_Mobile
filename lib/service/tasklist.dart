@@ -81,11 +81,17 @@ class Tasklist with ChangeNotifier {
     );
     notifyListeners();
   }
+<<<<<<< HEAD
  
   Future<void> deleteTask(Task task) async {
     await _databaseService.deleteTask(task.name);
     fetchTaskList();
     // print("Delete Task ${task.name}");
+=======
+
+  Future<void> deleteTask(Task task) async {
+    print("Delete Task ${task.name}");
+>>>>>>> b7f27d65b5dfb619e783be3ab349d3c2217b0085
     notifyListeners();
   }
 }

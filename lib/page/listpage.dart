@@ -33,8 +33,17 @@ class _MyListPageState extends State<MyListPage> {
               child: ListView.builder(
                 itemCount: context.watch<Tasklist>().taskList.length,
                 itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(context.watch<Tasklist>().taskList[index].name),
+                  var task = context.watch<Tasklist>().taskList[index];
+                  return Dismissible(
+                    key: UniqueKey(),
+                    onDismissed: (direction) {
+                      context.read<Tasklist>().deleteTask(task);
+                    },
+                    background: Container(color: Colors.red),
+                    child: ListTile(
+                      title:
+                          Text(context.watch<Tasklist>().taskList[index].name),
+                    ),
                   );
                 },
               ),
@@ -43,9 +52,12 @@ class _MyListPageState extends State<MyListPage> {
               children: [
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       // context.read<Tasklist>().addTask();
-                      Navigator.pushNamed(context, "/addTask");
+                      await Navigator.pushNamed(context, "/addTask");
+                      // if (!context.mounted) return;
+                      if (!mounted) return;
+                      context.read<Tasklist>().fetchTaskList();
                     },
                     child: const Text("Halaman Tambah"),
                   ),

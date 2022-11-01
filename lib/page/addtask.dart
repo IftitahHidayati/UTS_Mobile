@@ -35,6 +35,7 @@ class AddTaskPage extends StatelessWidget {
               children: [
                 Expanded(
                   child: ElevatedButton(
+<<<<<<< HEAD
                     onPressed: context.watch<Tasklist>().isActive
                         ? () {
                             context
@@ -48,6 +49,12 @@ class AddTaskPage extends StatelessWidget {
                             }
                           }
                         : null,
+=======
+                    onPressed: () {
+                      context.read<Tasklist>().addTask();
+                      Navigator.pop(context, true);
+                    },
+>>>>>>> b7f27d65b5dfb619e783be3ab349d3c2217b0085
                     child: const Text("Tambah Task Baru"),
                   ),
                 ),
